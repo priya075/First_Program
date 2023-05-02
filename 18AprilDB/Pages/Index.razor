@@ -1,0 +1,53 @@
+﻿@page "/"
+@using Models
+
+<PageTitle>Users</PageTitle>
+
+<h1>Names of the Counterparty</h1>
+<br />
+
+<div class="row">
+    <div class="col-10">
+        <table class=" table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>FName</th>
+                    <th>MName</th>
+                    <th>LName</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (users != null)
+                {
+                    foreach (var user in users)
+                    {
+                        if (user.Fname[0] == 'a' || user.Fname[0] == 'A')
+                        {
+                            <tr>
+                                <td>@user.Fname</td>
+                                <td>@user.Mname</td>
+                                <td>@user.Lname</td>
+
+                            </tr>
+
+                        }
+
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    DAL dal = new DAL();
+    private List<TblUser> users;
+
+    protected override void OnInitialized()
+    {
+        users = dal.GetUsers();
+    }
+
+}
